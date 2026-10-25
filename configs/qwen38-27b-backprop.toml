@@ -1,0 +1,48 @@
+# Conventional backpropagation baseline with exactly the same adapter placement.
+# It updates ALL adapters each step; Noise updates ONE each step. Compare time,
+# data exposure and held-out quality, not just equal optimizer step counts.
+[model]
+name = "unsloth/Qwen3.8-27B-unsloth-bnb-4bit"
+revision = "8aa5f05d26b7205477066e1449e0af13f762a299"
+device = "cuda"
+dtype = "bfloat16"
+load_in_4bit = true
+offload_embedding = true
+offload_vision = true
+attn_implementation = "sdpa"
+local_files_only = false
+replay_mode = "auto"
+
+[adapter]
+rank = 8
+alpha = 8.0
+last_n_layers = 4
+target_modules = ["mlp.down_proj"]
+
+[noise]
+pairs = 4
+sigma = 0.02
+probe = "hadamard"
+credit = "causal"
+
+[data]
+train = "data/tokenized/train.jsonl"
+validation = "data/tokenized/validation.jsonl"
+max_length = 2048
+
+[training]
+method = "backprop"
+output_dir = "runs/qwen38-backprop"
+max_steps = 100
+batch_size = 1
+gradient_accumulation_steps = 1
+learning_rate = 0.0001
+weight_decay = 0.0
+max_grad_norm = 1.0
+seed = 42
+checkpoint_every = 25
+eval_every = 25
+eval_batches = 8
+loss_chunk_size = 32
+shuffle = true
+overwrite = false

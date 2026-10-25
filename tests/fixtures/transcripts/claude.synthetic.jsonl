@@ -1,0 +1,2 @@
+{"type":"user","uuid":"synthetic-c-user","parentUuid":null,"sessionId":"synthetic-claude-session","message":{"role":"user","content":"Explain the synthetic test fixture."}}
+{"type":"assistant","uuid":"synthetic-c-final","parentUuid":"synthetic-c-user","sessionId":"synthetic-claude-session","message":{"id":"synthetic-response-1","role":"assistant","content":[{"type":"text","text":"It checks that transcript parsing preserves roles and target masks."}],"stop_reason":"end_turn"}}

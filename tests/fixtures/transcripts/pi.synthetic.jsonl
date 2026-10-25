@@ -1,0 +1,5 @@
+{"type":"session","version":3,"id":"synthetic-pi-session","timestamp":"2026-01-01T00:00:00Z","cwd":"/synthetic/project"}
+{"type":"message","id":"p-user","parentId":null,"message":{"role":"user","content":"Inspect the example configuration."}}
+{"type":"message","id":"p-call","parentId":"p-user","message":{"role":"assistant","content":[{"type":"toolCall","id":"synthetic-call","name":"read","arguments":{"path":"example.json"}}],"stopReason":"toolUse"}}
+{"type":"message","id":"p-tool","parentId":"p-call","message":{"role":"toolResult","toolCallId":"synthetic-call","toolName":"read","isError":false,"content":[{"type":"text","text":"{\"enabled\":true}"}]}}
+{"type":"message","id":"p-final","parentId":"p-tool","message":{"role":"assistant","content":[{"type":"text","text":"The example configuration enables the feature."}],"stopReason":"stop"}}
